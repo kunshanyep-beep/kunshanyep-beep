@@ -1,0 +1,40 @@
+name: Update profile summary cards
+
+on:
+  schedule:
+    - cron: "15 0 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/profile-summary-cards.yml
+
+permissions: {}
+
+concurrency:
+  group: profile-summary-cards
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6
+
+      - name: Generate light and dark profile cards
+        uses: vn7n24fzkq/github-profile-summary-cards@09ba4dde3f9b05828cb99553561db3f4ff07703f
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          USERNAME: ${{ github.repository_owner }}
+          BRANCH_NAME: main
+          UTC_OFFSET: 8
+          AUTO_PUSH: true
+          ANIMATION: load
+          DURATION: 2.2
