@@ -18,11 +18,13 @@ I am an open-source contributor focused on reliable developer tools, terminal wo
 
 ## Open-source impact
 
+Contributions to [botmux](https://github.com/deepcoldy/botmux): **2 merged PRs · 1 open PR**. Status verified on September 12, 2026.
+
 | Status | Contribution | Engineering result |
 | :---: | --- | --- |
-| **Merged** | [botmux #1293 — eliminate a history-ownership timing race](https://github.com/deepcoldy/botmux/pull/1293) | Replaced timer-dependent behavior with an observable happens-before boundary; the targeted test passed 10/10 repeated runs. |
-| **In review** | [botmux #1312 — add paste protocol support to bare PTY input](https://github.com/deepcoldy/botmux/pull/1312) | Prevents long or multiline OpenCode V2 input from being fragmented or submitted early; 512 related tests pass. |
-| **In review** | [botmux #1314 — bound TraeX session-recovery lookup cost](https://github.com/deepcoldy/botmux/pull/1314) | Adds a SQLite-indexed fast path, bounded date traversal, and miss backoff; a 5,000-sidecar synthetic sample improved from 21.273 ms to 0.742 ms. |
+| **Merged** | [botmux #1314 — optimize TraeX session-recovery lookup](https://github.com/deepcoldy/botmux/pull/1314) | Replaced full-tree recursion with a SQLite-indexed fast path, depth-bounded date traversal, and bounded miss backoff. In a deterministic 200-sidecar fallback fixture, stat calls fell from 204 to 0 with at most 4 directory reads. Maintainer validation passed 254 related tests and all 9 CI checks. |
+| **Merged** | [botmux #1293 — eliminate a history-ownership test timing race](https://github.com/deepcoldy/botmux/pull/1293) | Replaced fixed-delay test orchestration with an Enter-event happens-before boundary, preserving ownership filtering and retry coverage. Maintainer stress and mutation checks confirmed regression protection; merged and released in v3.19.3. |
+| **Open · awaiting review** | [botmux #1312 — add paste protocol support to bare PTY input](https://github.com/deepcoldy/botmux/pull/1312) | Implemented bracketed-paste handling for long or multiline OpenCode V2 messages on raw PTY, retaining typing behavior for slash commands and short single-line input. Submitted for review; 512 related tests passed locally. |
 
 ## Toolbox
 
